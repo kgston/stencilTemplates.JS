@@ -1,0 +1,59 @@
+<!-- StencilTemplate: Table v1.0.0 -->
+<stencil id="tableStencilTemplate">
+    <div id="{{tableID}}" class="st-tableContainer {{css}}" style="{{style}}">
+        <div id="st-tableOptionsTop" class="st-tableOptionsTop">
+            <stencil id="tableRowsDisplayed">
+                <div id="st-tableRowsDisplayed" class="st-tableOptionsItem">
+                    <span class="st-tableOptionsLabel">Rows per page: </span>
+                    <input id="st-tableRowsDisplayInput" type="text" value="{{rowsPerPage}}" placeholder="5">
+                </div>
+                <div class="st-tableOptionsDivider"> | </div>
+            </stencil>
+            <stencil id="tableSearch">
+                <div id="st-tableSearch" class="st-tableSearch st-tableOptionsItem">
+                    <span class="st-tableOptionsLabel">Search: </span>
+                    <input id="st-tableSearchInput" type="text" value="{{lastSearchTerm}}" placeholder="Enter keywords">
+                    <span id="st-tableSearchClear" class="st-tablePaginateTextButton st-noselect">x</span>
+                </div>
+            </stencil>
+        </div>
+        <stencil id="headers">
+            <div id="{{headerID}}" class="st-tableHeader {{css}}" style="{{style}}">
+                <stencil id="headerColumns">
+                    <div id="{{columnID}}" class="st-tableHeaderColumns {{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
+                        {{content}}
+                        <stencil id="sortIcon">
+                            <div class="{{css}}"></div>
+                        </stencil>
+                    </div>
+                </stencil>
+            </div>
+        </stencil>
+        <stencil id="rowSets">
+            <div id="{{rowSetID}}" class="st-tableRowSet {{css}}" style="{{style}}">
+                <stencil id="rows">
+                    <div id="{{rowID}}" class="st-tableRow {{css}}" style="{{style}}">
+                        <stencil id="rowColumns">
+                            <div id="{{columnID}}" class="st-tableRowColumn {{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
+                                {{content}}
+                            </div>
+                        </stencil>
+                    </div>
+                </stencil>
+            </div>
+            <stencil id="rowSetDivider">
+                <div id="{{rowDividerID}}" class="st-tableRowDivider {{css}}" style="{{style}}">
+                </div>
+            </stencil>
+        </stencil>
+        <stencil id="tablePaginate">
+            <div id="st-tablePaginate" class="st-tablePaginate st-defaultCursor st-noselect">
+                <div id="st-tablePaginatePrevPageBtn" class="st-tablePaginateTextButton" style="{{prevPageStyle}}">&lt;&nbsp;&nbsp;</div>
+                <div>
+                    <input id="st-tableCurrentPage" type="text" value="{{currentPage}}">&nbsp;/&nbsp;&nbsp;<span id="st-tableTotalPages">{{totalPages}}</span>
+                </div>
+                <div id="st-tablePaginateNextPageBtn" class="st-tablePaginateTextButton" style="{{nextPageStyle}}">&nbsp;&nbsp;&gt;</div>
+            </div>
+        </stencil>
+    </div>
+</stencil>

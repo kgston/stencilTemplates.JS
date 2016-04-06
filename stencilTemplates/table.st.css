@@ -1,0 +1,233 @@
+.st-defaultCursor {
+    cursor:d efault;
+}
+
+.st-noselect, .st-clickable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.st-clickable {
+    cursor: pointer;
+}
+
+.st-tableContainer {
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+
+.st-tableContainer input[type="text"] {
+    color: #dd362f;
+}
+
+.st-tableSortUp {
+    -webkit-mask-image: url("icons/Entypo/triangle-up.svg");
+    mask-image: url("icons/Entypo/triangle-up.svg");
+    -webkit-mask-position: 0px 1px;
+    mask-position: 0px 2px;
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.st-tableSortDown {
+    -webkit-mask-image: url("icons/Entypo/triangle-down.svg");
+    mask-image: url("icons/Entypo/triangle-down.svg");
+    -webkit-mask-position: 0px 0px;
+    mask-position: 0px 2px;
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.st-tableOptionsTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 3px;
+}
+
+.st-tableOptionsItem {
+    display: flex;
+    align-items: center;
+}
+
+.st-tableOptionsDivider {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 1.6em;
+    font-weight: 400;
+    color: #FCCA00;
+}
+
+.st-tableOptionsLabel {
+    padding-bottom: 3px;
+}
+
+#st-tableRowsDisplayInput {
+    width: 20px;
+}
+
+.st-tableSearch {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    padding-bottom: 3px;
+}
+
+#st-tableSearchInput {
+    width: 20%;
+    min-width: 200px;
+    max-width: 350px;
+}
+
+.st-tablePaginate { 
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+.st-tablePaginateTextButton {
+    font-weight: bolder;
+    font-size: 1.3em;
+    color: #FCCA00;
+    cursor: pointer;
+}
+
+#st-tableCurrentPage {
+    width: 20px;
+    font-style: normal;
+    cursor: auto;
+    font-weight: 600;
+    text-align: center;
+    padding-left: 0px;
+}
+
+.st-tableHeader {
+    display: flex;
+    flex-direction: row;
+    background: #FCCA00;
+    color: white;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.st-tableHeaderColumns {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 2px 0px;
+    border-right: white 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.st-tableHeaderDivider {
+    border-bottom: solid white 1px;
+}
+
+.st-tableHeaderColumns:first-of-type {
+    border-left: 3px solid #FCCA00;
+}
+
+.st-tableHeaderColumns:last-of-type {
+    border-right: none;
+}
+
+.st-tableRowSet {
+    font-size: 0.9em;
+    border-bottom: lightgrey 1px solid;
+}
+
+.st-tableRowSet .st-tableRowColumn:first-of-type {
+    border-left: 3px solid transparent;
+    transition: border-left 0.3s;
+}
+
+.st-tableRowSet:hover .st-tableRowColumn:first-of-type {
+    border-left: 3px solid #FCCA00;
+    transition: border-left 0.3s;
+}
+
+.st-tableRowSet:hover {
+    border-bottom: darkgrey 1px solid;
+}
+
+.st-tableRowSet:hover:before {
+    border-bottom: darkgrey 1px solid;
+}
+
+.st-tableRowSetSelected {
+    background: #fff8dc;
+    font-weight: 600;
+}
+
+.st-tableRowSetSelected .tableRowColumn:first-of-type {
+    border-left: 3px solid #FCCA00;
+}
+
+.st-tableRowSetSelected:hover {
+    background: #fff8dc;
+    font-weight: 600;
+}
+
+.st-tableRowSetError {
+    font-style: italic;
+    color: darkgrey;
+}
+
+.st-tableRowSetError:hover {
+    background: lightgrey;
+}
+
+.st-tableRow {
+    display: flex;
+    border-left: transparent 3px solid;
+    transition: border-left 0.3s;
+}
+
+.st-tableRow:first-of-type {
+    margin-top: 5px;
+}
+
+.st-tableRow:last-of-type {
+    margin-bottom: 5px;
+}
+
+.st-tableRowColumn {
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+    flex: 1;
+}
+
+.st-tableRowDivider {
+    height: 1px;
+    background-color: brown;
+    width: 100%;
+    transition: width 1s;
+}
+
+.st-tableRowError {
+    width: 100%;
+    justify-content: center;
+}
