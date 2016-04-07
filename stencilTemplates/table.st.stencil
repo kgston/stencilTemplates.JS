@@ -20,7 +20,7 @@
         <stencil id="headers">
             <div id="{{headerID}}" class="st-tableHeader {{css}}" style="{{style}}">
                 <stencil id="headerColumns">
-                    <div id="{{columnID}}" class="st-tableHeaderColumns {{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
+                    <div id="{{columnID}}" class="st-tableHeaderColumns {{global.columnCss{{lpIdx}}}}{{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
                         {{content}}
                         <stencil id="sortIcon">
                             <div class="{{css}}"></div>
@@ -34,7 +34,7 @@
                 <stencil id="rows">
                     <div id="{{rowID}}" class="st-tableRow {{css}}" style="{{style}}">
                         <stencil id="rowColumns">
-                            <div id="{{columnID}}" class="st-tableRowColumn {{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
+                            <div id="{{columnID}}" class="st-tableRowColumn {{global.columnCss{{lpIdx}}}}{{css}}" style="{{global.columnStyle{{lpIdx}}}}{{style}}">
                                 {{content}}
                             </div>
                         </stencil>

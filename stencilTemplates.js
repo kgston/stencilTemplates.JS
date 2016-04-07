@@ -20,7 +20,7 @@ stencilTemplates.opts = $.extend(stencilTemplates.opts || {}, (function() {
 
 stencilTemplates = $.extend(stencilTemplates, (function() {
     var loaded = {};
-    var init = function(templates) {
+    var init = function init(templates) {
         if (typeof templates === "string") {
             templates = [templates];
         } else if (!Array.isArray(templates)) {
@@ -59,7 +59,7 @@ stencilTemplates = $.extend(stencilTemplates, (function() {
         return loadTemplates.promise();
     }
 
-    $("head").ready(function() {
+    $("head").ready(function checkForStencil() {
         if (!stencil) {
             stencilTemplates.util.log("stencil.js has not been imported", true);
             return;
@@ -73,14 +73,14 @@ stencilTemplates = $.extend(stencilTemplates, (function() {
 
 stencilTemplates.util = $.extend(stencilTemplates.util || {}, (function() {
     return {
-        log: function(message, isCritical) {
+        log: function log(message, isCritical) {
             if (stencilTemplates.opts.debug) {
                 console.log("[debug] Stencil Templates: " + message);
             } else if (isCritical) {
                 console.log("Stencil Templates: " + message);
             }
         },
-        cloneJSON: function(json) {
+        cloneJSON: function cloneJSON(json) {
             return JSON.parse(JSON.stringify(json));
         },
     };

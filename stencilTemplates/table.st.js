@@ -34,7 +34,27 @@ var stencilTemplates = stencilTemplates || {};
                         rowSets: []
                     },
 
-                    //Adds a column width to the table
+                    //Adds a css to a specific column in the table
+                    //Params: css[string] - The css name
+                    //        columnIndex[int] - the index of the column starting from 0
+                    //Returns the tableBuilder object so you can chain your commands up
+                    addColumnCss: function(css, columnIndex) {
+                        if (css == null) {
+                            stencilTemplates.util.log("Specify a style name");
+                            return this;
+                        }
+                        if (columnIndex == null) {
+                            stencilTemplates.util.log("Specify a column index to style to");
+                            return this;
+                        }
+                        if (this.dataset.global["columnCss" + columnIndex] == null) {
+                            this.dataset.global["columnCss" + columnIndex] = "";
+                        }
+                        this.dataset.global["columnCss" + columnIndex] += css + " ";
+                        return this;
+                    },
+
+                    //Adds a style to a specific column in the table
                     //Params: styleName[string] - The specified css style property name
                     //        value[string] - the value for the given styleName
                     //        columnIndex[int] - the index of the column starting from 0
