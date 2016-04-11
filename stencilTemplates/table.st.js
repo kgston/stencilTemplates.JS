@@ -1,6 +1,6 @@
 /*
 @preserve table.st.js
-version 1.0.0
+version 0.9.0
 Kingston Chan - Released under the MIT licence
 */
 
@@ -148,7 +148,7 @@ var stencilTemplates = stencilTemplates || {};
                     //It will always append the rowSet to the bottom of all rowSets.
                     //A rowSet is a collection of rows which consists of a bottom border. 
                     //Rows do not contain bottom borders. This allows you to logically group rows together
-                    //For normal rows, just a row in a rowSet.
+                    //For normal rows, just a add row in a rowSet.
                     //Params: rowSetID?[string] - The ID of the rowSet
                     //        css?[string] - Any classnames to add to the rowSet
                     //        style?[string] - Any inline styles to add to the rowSet
@@ -168,7 +168,7 @@ var stencilTemplates = stencilTemplates || {};
                     //If you don't specify a rowSetIndex, it will add the rowSetDivider to the last rowSet.
                     //Params: rowSetIndex?[int] - Specify the rowSetIndex you want to add the rowSetDivider to
                     //Returns the tableBuilder object so you can chain your commands up
-                    addRowSetDivider: function(rowSetID, css, style, rowSetIndex) {
+                    addRowSetDivider: function(rowDividerID, css, style, rowSetIndex) {
                         if (this.dataset.rowSets.length === 0) {
                             stencilTemplates.util.log("There are no avaliable rowSets to add dividers to");
                             return this;
@@ -180,7 +180,7 @@ var stencilTemplates = stencilTemplates || {};
                             stencilTemplates.util.log("The specified rowSet is undefined");
                         } else {
                             this.dataset.rowSets[rowSetIndex].rowSetDivider.push({
-                                rowDividerID: rowSetID,
+                                rowDividerID: rowDividerID,
                                 css: css,
                                 style: style
                             });
@@ -312,14 +312,13 @@ var stencilTemplates = stencilTemplates || {};
                         };
                     },
 
-                    //Renders the dataset through the table stencil template returning a DOM fragment that 
-                    //can be appended into the page
+                    //Renders the dataset through the table stencil template passing the output DOM fragment as the parameter to the onComplete callback
                     render: function(onComplete) {
                         if (templates.table.stencil == null) {
                             templates.table.templateLoader.done(function() {
                                 this.render(onComplete);
                             }.bind(this));
-                            return;
+                            return this;
                         }
 
                         var thisObj = this;
@@ -625,13 +624,17 @@ var stencilTemplates = stencilTemplates || {};
                                 if (!isSingleUnselectAction) {
                                     //Get the data from the specified columns indexes of the clicked row
                                     //and store them in the data array
+                                    var rowSetData = [];
                                     tableSelector.selectRowIndexes.forEach(function(rowIdx) {
+                                        var rowData = [];
                                         //Get the columns of the specified row
                                         var columns = $(element[rowIdx]).find(".st-tableRowColumn");
                                         tableSelector.selectColumnIndexes.forEach(function(colIdx) {
-                                            data.push(columns[colIdx].innerHTML.trim());
+                                            rowData.push(columns[colIdx].innerHTML.trim());
                                         });
+                                        rowSetData.push(rowData);
                                     });
+                                    data.push(rowSetData);
 
                                     //If the data is not present in list, add to the list, else remove it
                                     if (tableSelector.selected[data] == null) {
@@ -654,13 +657,17 @@ var stencilTemplates = stencilTemplates || {};
 
                                 //Get the data from the specified columns indexes of the clicked row
                                 //and store them in the data array
+                                var rowSetData = [];
                                 tableSelector.selectRowIndexes.forEach(function(rowIdx) {
+                                    var rowData = [];
                                     //Get the columns of the specified row
                                     var columns = $(element[rowIdx]).find(".st-tableRowColumn");
                                     tableSelector.selectColumnIndexes.forEach(function(colIdx) {
-                                        data.push(columns[colIdx].innerHTML.trim());
+                                        rowData.push(columns[colIdx].innerHTML.trim());
                                     });
+                                    rowSetData.push(rowData);
                                 });
+                                data.push(rowSetData);
                                 //Run callback
                                 if (tableSelector.onDblClick != null) {
                                     tableSelector.onDblClick(data);
@@ -671,9 +678,10 @@ var stencilTemplates = stencilTemplates || {};
                         //Run the onComplete callback
                         onComplete(output);
                         this.onComplete = onComplete;
+                        return this
                     },
 
-                    //Updates the table (based on its tableID) with the new dataset
+                    //Updates the table (based on its tableID) with its existing dataset
                     //Returns the tableBuilder object so you can chain your commands up
                     update: function() {
                         //This is to prevent some bugs in browser where event gets triggered twice

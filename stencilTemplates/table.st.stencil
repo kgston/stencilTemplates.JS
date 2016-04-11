@@ -1,4 +1,4 @@
-<!-- StencilTemplate: Table v1.0.0 -->
+<!-- StencilTemplate: Table v0.9.0 -->
 <stencil id="tableStencilTemplate">
     <div id="{{tableID}}" class="st-tableContainer {{css}}" style="{{style}}">
         <div id="st-tableOptionsTop" class="st-tableOptionsTop">
