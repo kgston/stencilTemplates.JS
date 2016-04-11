@@ -164,11 +164,11 @@ var stencilTemplates = stencilTemplates || {};
                         return this;
                     },
 
-                    //Adds a rowSetDivider to a rowSet. 
-                    //If you don't specify a rowSetIndex, it will add the rowSetDivider to the last rowSet.
+                    //Adds a rowDivider to a rowSet. 
+                    //If you don't specify a rowSetIndex, it will add the rowDivider to the last rowSet.
                     //Params: rowSetIndex?[int] - Specify the rowSetIndex you want to add the rowSetDivider to
                     //Returns the tableBuilder object so you can chain your commands up
-                    addRowSetDivider: function(rowDividerID, css, style, rowSetIndex) {
+                    addRowDivider: function(rowDividerID, css, style, rowSetIndex) {
                         if (this.dataset.rowSets.length === 0) {
                             stencilTemplates.util.log("There are no avaliable rowSets to add dividers to");
                             return this;

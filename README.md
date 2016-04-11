@@ -34,9 +34,27 @@ Last modified: 11 Apr 2016
 
 Table is a fully featured data table that allows you to easily generate a div table layout quickly and easily without writing complicated table features. Table comes with pagination, text searching, column sorting and selection.
 
-### Table Usage/APIs
+#### Table Usage/APIs
 
-#### stencilTemplates.table(tableID [string], css? [string], style? [string])
+To use tables, first ensure that the table template files (stencil, js and css) are in the specified templates directory (stencilTemplates.opts.templates.path). Next, when initialising, make sure to pass in `"table"` as the template name. Anytime after stencilTemplates has initialized, the table builder will be avaliable via `stencilTemplates.table()`. With the table builder, you can add the necessary data into the table and then using the `render()` function, the resulting HTML fragment can be appended/inserted to any location on the page, complete with any optional click bindings.
+
+The hierarchy of a table is rather simple. Headers are always before row sets. While you can have only 1 header group, you can have 0 or more row sets. Within each, you can have 0 or more header rows and dividers and rows and dividers respectively. Within each header and row, you can have 0 or more columns. Row sets are used to logically group rows together. For normal tables with single rows, use 1 row in 1 row set. Click/double click selections are applied to row sets and not rows. Do note that you can have different number of columns in each header/row.
+
+```text
+Table
+  ˪ Headers
+    ˪ * Header rows
+      ˪ * Header columns
+    ˪ * Header dividers
+  ˪ * Row sets
+    ˪ * Rows
+      ˪ * Row columns
+    ˪ * Row dividers
+```
+
+*where * means 0 or more*
+
+##### stencilTemplates.table(tableID [string], css? [string], style? [string])
 
 Creates a table builder object. This object will provide the APIs as listed below.
 
@@ -45,7 +63,7 @@ Creates a table builder object. This object will provide the APIs as listed belo
 * style - Additional styles to append to the table html tag
 * *return* - A table builder object
 
-#### table.addColumnCss(css [string], columnIndex [int])
+##### table.addColumnCss(css [string], columnIndex [int])
 
 Adds the provided CSS classes to all cells in that column. Useful for setting global widths or a header column.
 
@@ -53,7 +71,7 @@ Adds the provided CSS classes to all cells in that column. Useful for setting gl
 * columnIndex - The column index to add the css classes to, starting from 0
 * *return* - The current table builder object
 
-#### table.addColumnStyle(styleName [string], value [string], columnIndex [int])
+##### table.addColumnStyle(styleName [string], value [string], columnIndex [int])
 
 Adds the provided styles to all cells in that column. It is better to use CSS classes instead of styles whenever possible.
 
@@ -62,7 +80,7 @@ Adds the provided styles to all cells in that column. It is better to use CSS cl
 * columnIndex - The column index to add the style to, starting from 0
 * *return* - The current table builder object
 
-#### table.addHeaderRow(headerRowID? [string], css? [string], style? [string])
+##### table.addHeaderRow(headerRowID? [string], css? [string], style? [string])
 
 Adds a header row to contain header columns. You may add multiple header rows and it will always append the new header row to the bottom of all header rows.
 
@@ -71,7 +89,7 @@ Adds a header row to contain header columns. You may add multiple header rows an
 * style - Any inline styles (in `style: value` format) to add to the header row
 * *return* - The current table builder object
 
-#### table.addHeaderColumn(content [string], headerColumnID? [string], css? [string], style? [string], headerRowIndex? [int])
+##### table.addHeaderColumn(content [string], headerColumnID? [string], css? [string], style? [string], headerRowIndex? [int])
 
 Adds a header column to a header row. You can add multiple header columns to a header row but only affects that particular row. If you don't specify a header row index, it will add the column to the last header row.
 
@@ -82,14 +100,14 @@ Adds a header column to a header row. You can add multiple header columns to a h
 * headerRowIndex - The headerRowIndex you want to add the column to. Defaults to the last header row if not specified
 * *return* - The current table builder object
 
-#### table.addHeaderDivider(headerRowIndex? [int])
+##### table.addHeaderDivider(headerRowIndex? [int])
 
 Adds a header divider to a header row. If you don't specify a header row index, it will add the column to the last headerRow.
 
 * headerRowIndex - The headerRowIndex you want to add the column to. Defaults to the last header row if not specified
 * *return* - The current table builder object
 
-#### table.addRowSet(rowSetID? [string], css? [string], style? [string])
+##### table.addRowSet(rowSetID? [string], css? [string], style? [string])
 
 Adds a row set to contain rows. You may add multiple row sets and it will always append the new row set to the bottom of all row sets. A row set is a collection of rows which consists of a bottom border. Rows do not contain bottom borders. This allows you to logically group rows together. For single rows, just a add row in a row set.
 
@@ -98,7 +116,7 @@ Adds a row set to contain rows. You may add multiple row sets and it will always
 * style - Any inline styles (in `style: value` format) to add to the headerRow
 * *return* - The current table builder object
 
-#### table.addRowSetDivider(rowDividerID? [string], css? [string], style? [string], rowSetIndex? [int])
+##### table.addRowDivider(rowDividerID? [string], css? [string], style? [string], rowSetIndex? [int])
 
 Adds a row set divider to a row set. If you don't specify a row set row index, it will add the column to the last row set.
 
@@ -108,13 +126,13 @@ Adds a row set divider to a row set. If you don't specify a row set row index, i
 * headerRowIndex - The headerRowIndex you want to add the column to. Defaults to the last header row if not specified
 * *return* - The current table builder object
 
-#### table.getRowSetSize()
+##### table.getRowSetSize()
 
 Gets the number of rowSets.
 
 * *return* - The current the current number of row sets
 
-#### table.addRow(rowID? [string], css? [string], style? [string], rowSetIndex? [int])
+##### table.addRow(rowID? [string], css? [string], style? [string], rowSetIndex? [int])
 
 Adds a row to a row set. You may add multiple rows to a row set and it will always append the new row to the bottom of the row set. If you don't specify a row set row index, it will add the column to the last row set. Rows do not contain bottom borders and needs to be contained in a row set.
 
@@ -123,14 +141,14 @@ Adds a row to a row set. You may add multiple rows to a row set and it will alwa
 * style - Any inline styles (in `style: value` format) to add to the headerRow
 * *return* - The current table builder object
 
-#### table.getRowSize(rowSetIndex [int])
+##### table.getRowSize(rowSetIndex [int])
 
 Gets the number of rows in a row set.
 
 * rowSetIndex - The index of the row set index to check
 * *return* - The current the current number of rows
 
-#### table.addRowColumn(content [string], rowColumnID? [string], css? [string], style? [string], rowSetIndex? [int], rowIndex? [int])
+##### table.addRowColumn(content [string], rowColumnID? [string], css? [string], style? [string], rowSetIndex? [int], rowIndex? [int])
 
 Adds a row column to a header row. You can add multiple row columns to a row but only affects that particular row. If you don't specify a row or row set index, it will add the column to the last row in the last row set.
 
@@ -142,37 +160,37 @@ Adds a row column to a header row. You can add multiple row columns to a row but
 * rowIndex - The row index you want to add the column to. Defaults to the last row if not specified
 * *return* - The current table builder object
 
-#### table.getDataset()
+##### table.getDataset()
 
 Gets the final JSON dataset object for use in rendering the stencil based template
 
 * *return* - The stencil table dataset object
 
-#### table.clearDataset()
+##### table.clearDataset()
 
 Clears out all data from the table but leaves sort, search and paginate options alone to preserve user's existing context.
 
 * *return* - The stencil table dataset object
 
-#### table.clearAll()
+##### table.clearAll()
 
 Clears out all data from the table including sort, search and paginate options.
 
 * *return* - The stencil table dataset object
 
-#### table.render(onComplete [function])
+##### table.render(onComplete [function])
 
 Renders the dataset through the table stencil template passing the output DOM fragment as the first parameter to the onComplete callback.
 
 * *return* - The stencil table dataset object
 
-#### table.update()
+##### table.update()
 
 Updates the table (based on its tableID) with its existing dataset.
 
 * *return* - The stencil table dataset object
 
-#### table.enableSort(allowMultipleColumns? [boolean], limitSortColumns? [int | Array[int]])
+##### table.enableSort(allowMultipleColumns? [boolean], limitSortColumns? [int | Array[int]])
 
 Enables column sorting functionality. It will apply the sortable columns to the last header row.
 
@@ -180,7 +198,7 @@ Enables column sorting functionality. It will apply the sortable columns to the 
 * limitSortColumns - Limit sorting to the specific columns
 * *return* - The stencil table dataset object
 
-#### table.enableSearch(searchColumnIndexes? [int | Array[int]], searchRowIndexes? [int | Array[int]])
+##### table.enableSearch(searchColumnIndexes? [int | Array[int]], searchRowIndexes? [int | Array[int]])
 
 Enables the search functionality.
 
@@ -188,14 +206,14 @@ Enables the search functionality.
 * searchRowIndexes - The row indexes you want to limit the search to. This is the row index, not row set index. e.g. Limit search to the `[x, y, z]` row of every row set only
 * *return* - The stencil table dataset object
 
-#### table.enablePaginate(rowsPerPage? [int])
+##### table.enablePaginate(rowsPerPage? [int])
 
 Enables table pagination functionality.
 
 * rowsPerPage - The number of rows (not row sets) to display in a table page. This is to allow for even pages as some row sets may contain different number of rows
 * *return* - The stencil table dataset object
 
-#### table.enableSelector(selectRowIndexes [int | Array[int]], selectColumnIndexes [int | Array[int]], allowMultipleSelects? [boolean], onClick? [function([cellContent, ...])], onDblClick? [function([cellContent, ...])])
+##### table.enableSelector(selectRowIndexes [int | Array[int]], selectColumnIndexes [int | Array[int]], allowMultipleSelects? [boolean], onClick? [function([cellContent, ...])], onDblClick? [function([cellContent, ...])])
 
 Enables the selector functionaity.
 
@@ -206,13 +224,13 @@ Enables the selector functionaity.
 * onDblClick - Sets a callback to be activated on double click of a rowSet. Passes in an Array of cellContents of the specified columnIndex. allowMultipleSelects does not affect double clicks.
 * *return* - The stencil table dataset object
 
-#### table.getSelected()
+##### table.getSelected()
 
 Gets an Array of selected items and its contents from the columns specified in the columnIndexs parameter in the clicked order, `[[cellContent, ...], ...]`.
 
 * *return* - The stencil table dataset object
 
-#### table.emptySelected()
+##### table.emptySelected()
 
 Clears the selection from this table.
 
