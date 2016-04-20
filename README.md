@@ -235,3 +235,7 @@ Gets an Array of selected items and its contents from the columns specified in t
 Clears the selection from this table.
 
 * *return* - The stencil table dataset object
+
+### Acknowledgements
+
+Table Icons by [Entypo](http://www.entypo.com/) Released under CC BY-SA 4.0.

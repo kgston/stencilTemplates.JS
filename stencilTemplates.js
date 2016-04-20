@@ -85,4 +85,3 @@ stencilTemplates.util = $.extend(stencilTemplates.util || {}, (function() {
         },
     };
 })());
-
